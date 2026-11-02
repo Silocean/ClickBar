@@ -11,8 +11,6 @@ struct InsightsView: View {
         let message = loginMessage
         VStack(alignment: .leading, spacing: 12) {
             VStack(alignment: .leading, spacing: 8) {
-                Toggle("在菜单栏显示今日次数", isOn: showCountBinding)
-                    .font(.system(size: 13))
                 Toggle("登录时打开", isOn: launchBinding)
                     .font(.system(size: 13))
                 if let message {
@@ -67,13 +65,6 @@ struct InsightsView: View {
         } message: {
             Text("今天、历史和统计都会清空，而且无法撤销。")
         }
-    }
-
-    private var showCountBinding: Binding<Bool> {
-        Binding(
-            get: { monitor.showMenuBarCount },
-            set: { monitor.showMenuBarCount = $0 }
-        )
     }
 
     private var launchBinding: Binding<Bool> {

@@ -92,11 +92,6 @@ final class ClickMonitor {
     let store: StatsStore
     var isPaused = false
     private(set) var isTrusted = false
-    var showMenuBarCount: Bool {
-        didSet {
-            UserDefaults.standard.set(showMenuBarCount, forKey: Keys.showCount)
-        }
-    }
     private(set) var serviceEpoch = 0
     private(set) var loginFailed = false
     private(set) var sessionLeft = 0
@@ -119,8 +114,6 @@ final class ClickMonitor {
         let shouldSuppress = InstanceGuard.anotherInstanceRunning()
         suppressed = shouldSuppress
         self.store = store ?? StatsStore.live(calendar: AppCalendar.current)
-        let stored = UserDefaults.standard.object(forKey: Keys.showCount) as? Bool
-        showMenuBarCount = stored ?? true
         if shouldSuppress {
             DispatchQueue.main.async {
                 NSApp.terminate(nil)
@@ -320,7 +313,6 @@ final class ClickMonitor {
     }
 
     private enum Keys {
-        static let showCount = "ClickBar.showMenuBarCount"
         static let promptedStamp = "ClickBar.promptedBuildStamp"
     }
 }

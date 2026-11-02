@@ -116,17 +116,9 @@ final class ClickBarController: NSObject, NSApplicationDelegate {
             .withSymbolConfiguration(configuration)
         image?.isTemplate = true
         button.image = image
-        button.imagePosition = .imageLeading
-        if monitor.isPaused {
-            button.title = " 暂停"
-            button.alphaValue = 0.55
-        } else if monitor.showMenuBarCount {
-            button.title = " \(ClickFormat.compact(stats.total))"
-            button.alphaValue = 1
-        } else {
-            button.title = ""
-            button.alphaValue = 1
-        }
+        button.imagePosition = .imageOnly
+        button.title = ""
+        button.alphaValue = monitor.isPaused ? 0.55 : 1
         button.toolTip = help
         button.setAccessibilityLabel(help)
     }
